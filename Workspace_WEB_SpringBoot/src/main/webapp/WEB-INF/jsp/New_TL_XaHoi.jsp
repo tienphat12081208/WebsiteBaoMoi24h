@@ -163,7 +163,8 @@
 </head>
 <body>
 <div><%@ include file = "Header.jsp" %></div>
-<div id="banner">
+<div id= "content_main">
+ <div id="banner">
     <img class="banner" src="static/image/banner.jpg">
     <img class="banner" src="static/image/banner2.jpg">
     <img class="banner" src="static/image/banner3.jpg">
@@ -184,7 +185,7 @@
             setTimeout(carousel, 3000); // Change image every 3 seconds
         }
     </script>
-
+ </div>
 
 <div id="main">
     <div id="left">
@@ -219,7 +220,7 @@
 
         </ul>
     </div>
-
+</div>
 </div>
 </body>
 </html>

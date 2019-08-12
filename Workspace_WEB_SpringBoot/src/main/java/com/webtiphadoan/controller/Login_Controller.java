@@ -1,13 +1,9 @@
 package com.webtiphadoan.controller;
 
-import com.webtiphadoan.model.Login_Model;
-import com.webtiphadoan.model.News_Model;
-import com.webtiphadoan.model.Personnel_Model;
+import com.webtiphadoan.model.*;
 import com.webtiphadoan.repository.Login_Repository;
 import com.webtiphadoan.repository.Number_View_Repository;
-import com.webtiphadoan.service.Login_Service;
-import com.webtiphadoan.service.News_Service;
-import com.webtiphadoan.service.Personnel_Service;
+import com.webtiphadoan.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +29,11 @@ public class Login_Controller {
     News_Service news_service;
     @Autowired
     Number_View_Repository number_view_repository;
+    @Autowired
+    Chuyenmuc_Service chuyenmuc_service;
+    @Autowired
+    Trangthai_Service trangthai_service;
+
 
 
 
@@ -55,17 +56,21 @@ public class Login_Controller {
 
         if (!login.isEmpty()) {
             String user_name = login_model.getUser();
+            Integer id_user=null;
             String name="";
             String idvaitro="";
             for (Login_Model logins:login) {
                   idvaitro =logins.getIdvaitro();
                   name=logins.getName();
+                  id_user= logins.getId();
 
                    break;
             }
+            session.setAttribute("ID_User", id_user);
             session.setAttribute("User_Session", user_name);
             session.setAttribute("Name", name);
             session.setAttribute("IDvaitro", idvaitro);
+
             return new ModelAndView("redirect:/");
 
 
@@ -78,12 +83,12 @@ public class Login_Controller {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView Home() {
+    public ModelAndView Home(HttpSession session) {
         ModelAndView model = new ModelAndView();
-        List<News_Model> News_model_HOME = news_service.getNews_All();
-
+        List<News_Model> News_model_HOME = news_service.Select_All_withTT();
         List<News_Model> number_view_models= news_service.getNewsByView();
         List<News_Model> news_models_Numberview = new ArrayList<>();
+        List<Trangthai_Model> trangthai_models= trangthai_service.SelectAll();
         int flag=0;
         for (News_Model number_view:number_view_models) {
                news_models_Numberview.add(number_view);
@@ -94,19 +99,14 @@ public class Login_Controller {
               }
 
         }
+
         model.addObject("Number_views_obj", news_models_Numberview);
         model.addObject("Home_obj", News_model_HOME);
+        model.addObject("Trangthai_obj",trangthai_models);
         model.setViewName("Home");
         return model;
     }
-    @RequestMapping(value = "/hihi", method = RequestMethod.GET)
-    public ModelAndView Home_1() {
-        ModelAndView model = new ModelAndView();
-        List<News_Model> number_view_models= news_service.getNewsByView();
-        model.addObject("Number_views_obj", number_view_models);
-        model.setViewName("Hihi");
-        return model;
-    }
+
 
 
     @RequestMapping(value = "/addaccount", method = RequestMethod.GET)

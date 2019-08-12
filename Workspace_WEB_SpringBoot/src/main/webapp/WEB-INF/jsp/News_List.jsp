@@ -28,6 +28,7 @@
         <th scope="row">Tóm tắt</th>
         <th scope="row">Người đăng</th>
         <th scope="row">Thời gian</th>
+        <th scope="row">Trạng thái</th>
         <th scope="row">Chỉnh sửa</th>
         <th scope="row">Xóa</th>
         </thead>
@@ -36,10 +37,25 @@
             <tr>
                 <td>${new_list.id }</td>
                 <td>${new_list.tieude }</td>
-                <td>${new_list.chuyenmuc}</td>
+                <c:forEach items="${chuyen_muc}" var="chuyenmuc">
+                    <c:if test="${new_list.idchuyenmuc == chuyenmuc.idchuyenmuc}">
+                        <td>${chuyenmuc.chuyenmuc}</td>
+                    </c:if>
+                </c:forEach>
                 <td>${new_list.tomtat}</td>
                 <td>${new_list.tacgia}</td>
                 <td>${new_list.thoigian}</td>
+                <c:forEach items="${trangthai_list}" var="trangthai">
+                    <c:if test="${new_list.id == trangthai.idnews}">
+                        <c:if test="${trangthai.trangthai!=0}">
+                            <td><a  class="btn btn-primary" role="button">Đã duyệt</a></td>
+                        </c:if>
+                        <c:if test="${trangthai.trangthai==0}">
+                            <spring:url value="duyetnews/${new_list.id}" var="Duyet_News"/>
+                            <td><a href="${Duyet_News}" class="btn btn-danger"  role="button">Chưa duyệt</a></td>
+                        </c:if>
+                    </c:if>
+                </c:forEach>
 
                 <td>
                     <spring:url value="update_news/${new_list.id}" var="update_News_URL" />

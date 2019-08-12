@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class Number_View_Servicelmpl implements Number_View_Service {
+public class Number_View_Servicelmpl implements Number_View_Service{
 
     @Autowired
     Number_View_Repository number_view_repository;

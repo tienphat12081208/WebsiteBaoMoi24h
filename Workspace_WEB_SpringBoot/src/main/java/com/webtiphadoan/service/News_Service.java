@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface News_Service {
 
+    public List<News_Model> Select_All_withTT();
+
     public List<News_Model> getNews_All();
-
-
     public News_Model getNewsById(int id);
     public List<News_Model> getNewsByView();
 
@@ -19,5 +19,5 @@ public interface News_Service {
 
     public void deleteNews(int id);
 
-    public List<News_Model> getNewsByChuyenMuc(String chuyenmuc);
+    public List<News_Model> getNewsByChuyenMuc(int chuyenmuc);
 }

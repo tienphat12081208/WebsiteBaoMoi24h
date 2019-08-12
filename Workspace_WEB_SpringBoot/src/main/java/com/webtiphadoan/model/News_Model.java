@@ -32,13 +32,7 @@ public class News_Model {
         this.tieude = tieude;
     }
 
-    public String getChuyenmuc() {
-        return chuyenmuc;
-    }
 
-    public void setChuyenmuc(String chuyenmuc) {
-        this.chuyenmuc = chuyenmuc;
-    }
 
     public String getNoidung() {
         return noidung;
@@ -88,8 +82,17 @@ public class News_Model {
     @Column(name = "tieude")
     private String tieude;
 
-    @Column(name = "chuyenmuc")
-    private String chuyenmuc;
+
+    public Integer getIdchuyenmuc() {
+        return idchuyenmuc;
+    }
+
+    public void setIdchuyenmuc(Integer idchuyenmuc) {
+        this.idchuyenmuc = idchuyenmuc;
+    }
+
+    @Column(name = "idchuyenmuc")
+    private Integer idchuyenmuc;
 
     @Column(name = "noidung")
     private String noidung;
@@ -106,4 +109,7 @@ public class News_Model {
 
     @Column(name = "tomtat")
     private String tomtat;
+
+
+
 }

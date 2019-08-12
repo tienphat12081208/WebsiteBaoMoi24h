@@ -7,4 +7,5 @@ import java.util.List;
 public interface Vaitro_Service {
    List<Vaitro_Model>  GetALLvaitro();
 
+
 }

@@ -16,18 +16,10 @@
     <title>Home</title>
 
 <style>
-    body {
-        font-family: Tahoma;
-        font-size: 13px;
-        width: 1000px;
-        margin: 0px auto;
-    }
+
 
     #banner {
-
         width: 1000px;
-
-
     }
     #banner .banner{
         width: 1000px;
@@ -131,6 +123,7 @@
 </head>
 <body>
 <div><%@ include file = "Header.jsp" %></div>
+<div id= "content_main">
 <div id="banner">
     <img class="banner" src="static/image/banner.jpg">
     <img class="banner" src="static/image/banner2.jpg">
@@ -157,16 +150,17 @@
 
             <div id="left">
                 <ul>
+
                     <c:forEach items="${Home_obj}" var="Home_obj">
-                    <li>
+                     <li>
                         <img src="${Home_obj.hinhanh}">
                         <h2>${Home_obj.tieude }</h2>
                         ${Home_obj.tomtat}
                         <spring:url value="/shows_news/${Home_obj.id}" var="get_news_URL" />
                         <a  href="${get_news_URL }">Xem bài viết</a>
-
                     </li>
                     </c:forEach>
+
                 </ul>
             </div>
             <div id="right">
@@ -188,6 +182,6 @@
             </div>
 
 </div>
-
+</div>
 </body>
 </html>

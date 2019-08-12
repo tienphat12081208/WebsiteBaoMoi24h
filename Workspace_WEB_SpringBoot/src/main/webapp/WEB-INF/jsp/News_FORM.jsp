@@ -11,18 +11,15 @@
     <link href="../../webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="../../webjars/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="../../webjars/jquery/3.0.0/js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <script src="jquery.js"></script>
+
+
     <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <title>Tạo bài viết</title>
     <script src="../static/ckeditor/ckeditor.js"></script>
     <style>
-        body {
-            font-family: Tahoma;
-            font-size: 13px;
-            width: 1000px;
-            margin: 0px auto;
-        }
+
 
         #banner {
 
@@ -283,6 +280,7 @@
 </head>
 <body>
 <div><%@ include file = "Header.jsp" %></div>
+<div id= "content_main">
 <div id="banner">
     <img class="banner" src="../static/image/banner.jpg">
     <img class="banner" src="../static/image/banner2.jpg">
@@ -315,7 +313,11 @@
         </div>
         <div id="theloai">
             <h3>Thể loại</h3>
-            <form:input path="chuyenmuc" id="input" />
+            <form:select path="idchuyenmuc">
+                <c:forEach items="${chuyen_muc}" var="chuyenmuc">
+                        <form:option value="${chuyenmuc.idchuyenmuc}">${chuyenmuc.chuyenmuc}</form:option>
+                </c:forEach>
+            </form:select>
         </div>
         <div id="tacgia">
             <h3>Người đăng</h3>
@@ -367,6 +369,7 @@
 
     </form>
 
+</div>
 </div>
 
 </body>

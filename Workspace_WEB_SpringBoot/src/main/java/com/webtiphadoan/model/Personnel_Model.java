@@ -64,13 +64,7 @@ public class Personnel_Model {
         this.diachi = diachi;
     }
 
-    public String getIdvaitro() {
-        return idvaitro;
-    }
 
-    public void setIdvaitro(String idvaitro) {
-        this.idvaitro = idvaitro;
-    }
 
     @Column(name = "cmnd")
     private String cmnd;
@@ -78,8 +72,17 @@ public class Personnel_Model {
     private String gioitinh;
     @Column(name = "diachi")
     private String diachi;
+
+    public Integer getIdvaitro() {
+        return idvaitro;
+    }
+
+    public void setIdvaitro(Integer idvaitro) {
+        this.idvaitro = idvaitro;
+    }
+
     @Column(name = "idvaitro")
-    private String idvaitro;
+    private Integer idvaitro;
 
 
 

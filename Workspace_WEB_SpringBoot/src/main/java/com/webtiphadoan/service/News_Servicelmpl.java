@@ -19,6 +19,9 @@ public class News_Servicelmpl implements News_Service {
     News_Repositoty news_repositoty;
 
     @Override
+    public List<News_Model> Select_All_withTT() {return (List<News_Model>) news_repositoty.Select_All_withTT();
+    }
+    @Override
     public List<News_Model> getNews_All() {return (List<News_Model>) news_repositoty.findAll();
     }
     @Override
@@ -40,8 +43,8 @@ public class News_Servicelmpl implements News_Service {
     public void deleteNews(int id) {news_repositoty.deleteById((id));
     }
     @Override
-    public List<News_Model> getNewsByChuyenMuc(String chuyenmuc) {
-        return news_repositoty.Find_News_chuyenmuc(chuyenmuc);
+    public List<News_Model> getNewsByChuyenMuc(int idchuyenmuc) {
+        return news_repositoty.Find_News_chuyenmuc(idchuyenmuc);
     }
 
 

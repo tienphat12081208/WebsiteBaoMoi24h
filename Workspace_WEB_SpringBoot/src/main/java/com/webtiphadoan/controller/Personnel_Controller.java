@@ -4,7 +4,7 @@ package com.webtiphadoan.controller;
 import com.webtiphadoan.model.Personnel_Model;
 import com.webtiphadoan.model.Vaitro_Model;
 import com.webtiphadoan.repository.Personnel_Repsository;
-import com.webtiphadoan.repository.Vaitro_Repositoty;
+import com.webtiphadoan.service.Chuyenmuc_Service;
 import com.webtiphadoan.service.Personnel_Service;
 import com.webtiphadoan.service.Vaitro_Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,6 +25,8 @@ public class Personnel_Controller {
     Personnel_Repsository personnel_repsository;
     @Autowired
     Vaitro_Service vaitro_service;
+    @Autowired
+    Chuyenmuc_Service chuyenmuc_service;
 
 
     @RequestMapping(value = "/personnel", method = RequestMethod.GET)
@@ -48,11 +49,9 @@ public class Personnel_Controller {
     @RequestMapping(value = "/updateopersonnel/{id}", method = RequestMethod.GET)
     public ModelAndView Edit_Personnel(@PathVariable int id) {
         ModelAndView model = new ModelAndView();
-
         Personnel_Model personnel_model_EDIT = personnel_service.getArticleById(id);
         model.addObject("Personnel_Form", personnel_model_EDIT);
-        model.setViewName("List_Personnel");
-
+        model.setViewName("Admin_Them_NhanSu");
         return model;
 
     }
@@ -60,13 +59,13 @@ public class Personnel_Controller {
     @RequestMapping(value="/save_Personnel", method=RequestMethod.POST)
     public ModelAndView Save_Personnel(@ModelAttribute("Personnel_Form") Personnel_Model personnel_model) {
         personnel_service.saveOrUpdate(personnel_model);
-        return new ModelAndView("redirect:/personnel");
+        return new ModelAndView("redirect:/adminnhansu");
     }
     @RequestMapping(value="/delete_Personnel/{id}", method=RequestMethod.GET)
     public ModelAndView Delete_Perspnnel(@PathVariable("id") int id) {
         personnel_service.deleteArticle(id);
 
-        return new ModelAndView("redirect:/personnel");
+        return new ModelAndView("redirect:/adminnhansu");
     }
 
 
@@ -75,7 +74,7 @@ public class Personnel_Controller {
         ModelAndView model = new ModelAndView();
         Personnel_Model personnel_model=new Personnel_Model();
         model.addObject("Personnel_Form",personnel_model);
-        model.setViewName("List_Personnel");
+        model.setViewName("Admin_Them_NhanSu");
         return model;
     }
 

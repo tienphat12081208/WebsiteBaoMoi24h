@@ -12,12 +12,7 @@
     <script src="../../webjars/jquery/3.0.0/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="path/to/my.css">
     <style>
-        body {
-            font-family: Tahoma;
-            font-size: 13px;
-            width: 1000px;
-            margin: 0px auto;
-        }
+
         #main{
 
             height: 720px;
@@ -367,13 +362,13 @@
                 <form:input path="ngaysinh"/>
             </div>
             <div id="gioitinh">
-                <h2>Giới tính</h2>
-                <div id="gioitinh_radio">
-                    <form:radiobutton path="gioitinh" value="Nam"/>Nam
-                    <form:radiobutton path="gioitinh" value="Nữ"/>Nữ
-                </div>
+            <h2>Giới tính</h2>
+            <div id="gioitinh_radio">
+                <form:radiobutton path="gioitinh" value="Nam"/>Nam
+                <form:radiobutton path="gioitinh" value="Nữ"/>Nữ
+            </div>
 
-             </div>
+        </div>
             <div id="diachi">
                 <h2>Địa chỉ</h2>
                 <form:textarea path="diachi"/>

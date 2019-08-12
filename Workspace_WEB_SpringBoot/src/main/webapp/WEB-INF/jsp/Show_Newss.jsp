@@ -11,12 +11,7 @@
     <title><c:out value="${show_news_obj.tieude}"></c:out></title>
 
     <style>
-        body {
-            font-family: Tahoma;
-            font-size: 13px;
-            width: 1000px;
-            margin: 0px auto;
-        }
+
 
         #banner {
 
@@ -211,6 +206,7 @@
 </head>
 <body>
 <div><%@ include file = "Header.jsp" %></div>
+<div id= "content_main">
 <div id="banner">
     <img class="banner" src="https://scontent.fsgn2-1.fna.fbcdn.net/v/t1.15752-9/67062598_2437866696469201_988575452903768064_n.jpg?_nc_cat=107&_nc_oc=AQkUX5wKX-n_fUpcf1YQCndcaaXmjWD-SNP8cKmPIvPxanVxgSycUMbSHXxfoZ-ylsY&_nc_ht=scontent.fsgn2-1.fna&oh=8b8ef5aa6687bf49e8de3f46f40485b6&oe=5DC2EC51">
     <img class="banner" src="https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.15752-9/66691134_2320097474974709_7299615150858829824_n.jpg?_nc_cat=102&_nc_oc=AQnSOA9xxZimk5bM_Cg_7zM1Usipix6a4IXeOvcZVQOhyXgCxSnPBHP3C-7j1Aa21fE&_nc_ht=scontent.fsgn2-2.fna&oh=eb3a017b47d4d58cb3ed7525e669a99c&oe=5DA94BBC">
@@ -235,7 +231,12 @@
 
 <div id="main_bv">
     <div id="left_bv">
-        <h1 id="chuyenmuc">${show_news_obj.chuyenmuc}</h1>
+        <c:forEach items="${chuyen_muc}" var="chuyenmuc">
+            <c:if test="${show_news_obj.idchuyenmuc == chuyenmuc.idchuyenmuc}">
+                <h1 id="chuyenmuc">${chuyenmuc.chuyenmuc}</h1>
+            </c:if>
+        </c:forEach>
+
         <div id="khungcongtac">
             <p id ="nguoidang">${show_news_obj.tacgia}</p><p id="time"> đăng lúc ${show_news_obj.thoigian}</p>
         </div>
@@ -286,6 +287,6 @@
         });
     });
 </script>
-
+</div>
 </body>
 </html>

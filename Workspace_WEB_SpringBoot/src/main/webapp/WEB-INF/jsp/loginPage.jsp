@@ -66,10 +66,11 @@
             width: 200px;
             display: block;
             border: none;
-            padding: 10px 0;
+            padding: 10px 5px;
             border-bottom: solid 1px #9adce8;
             text-align: left;
-            color: #9adce8;
+            color: #117700;
+            font-size: 18px;
         }
 
 
@@ -83,6 +84,7 @@
             color: #001d45;
             margin-left: 25px;
             box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+            font-size: 16px;
         }
         #main_login #right_login #form button:hover {
             transform: translateY(-3px);
@@ -101,6 +103,7 @@
 </head>
 <body>
 <div><%@ include file = "Header.jsp" %></div>
+<div id= "content_main">
 <div id="main_login">
     <div id="left_login">
         <img src="../static/image/2019-07-18_162656.jpg">
@@ -114,9 +117,10 @@
             <c:if test="${not empty message}">
             <p>Đăng nhập thất bại vui lòng kiểm tra tài khoản, mật khẩu!</p>
             </c:if>
-            <button>Submit</button>
+            <button>Đăng Nhập</button>
         </form:form>
     </div>
+</div>
 </div>
 </body>
 </html>
