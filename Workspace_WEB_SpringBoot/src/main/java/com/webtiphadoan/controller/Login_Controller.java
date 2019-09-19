@@ -41,14 +41,14 @@ public class Login_Controller {
     public ModelAndView loginPage() {
         ModelAndView model = new ModelAndView();
         Login_Model login = new Login_Model();
-        model.addObject("loginForm", login);
-        model.setViewName("loginPage");
+        model.addObject("login", login);
+        model.setViewName("LoginModal");
         return model;
     }
 
 
     @RequestMapping(value = "/errorlogin", method = RequestMethod.POST)
-    public ModelAndView login(@ModelAttribute("loginForm") Login_Model login_model, HttpSession session) {
+    public ModelAndView login(@ModelAttribute("login") Login_Model login_model, HttpSession session) {
         ModelAndView model_view = new ModelAndView();
 
         List<Login_Model> login = loginService.getAccount2(login_model.getUser(), login_model.getPass());
@@ -77,7 +77,7 @@ public class Login_Controller {
         } else {
             messger="Thong bao loi login";
             model_view.addObject("message",messger);
-            model_view.setViewName("loginPage");
+            model_view.setViewName("LoginModal");
             return model_view;
         }
     }
@@ -89,6 +89,7 @@ public class Login_Controller {
         List<News_Model> number_view_models= news_service.getNewsByView();
         List<News_Model> news_models_Numberview = new ArrayList<>();
         List<Trangthai_Model> trangthai_models= trangthai_service.SelectAll();
+        List<News_Model> New_news= news_service.New_news();
         int flag=0;
         for (News_Model number_view:number_view_models) {
                news_models_Numberview.add(number_view);
@@ -99,11 +100,11 @@ public class Login_Controller {
               }
 
         }
-
+        model.addObject("New_news_obj", New_news);
         model.addObject("Number_views_obj", news_models_Numberview);
         model.addObject("Home_obj", News_model_HOME);
         model.addObject("Trangthai_obj",trangthai_models);
-        model.setViewName("Home");
+        model.setViewName("Home_News");
         return model;
     }
 

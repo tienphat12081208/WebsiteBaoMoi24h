@@ -46,6 +46,11 @@ public class News_Servicelmpl implements News_Service {
     public List<News_Model> getNewsByChuyenMuc(int idchuyenmuc) {
         return news_repositoty.Find_News_chuyenmuc(idchuyenmuc);
     }
+    @Override
+    public List<News_Model> New_news() {
+
+         return (List<News_Model>) news_repositoty.New_news();
+    }
 
 
 }

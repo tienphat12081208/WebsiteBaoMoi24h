@@ -75,6 +75,16 @@ public class Admin_Controller {
 
 
     }
+    @RequestMapping(value="/add_News", method=RequestMethod.GET)
+    public ModelAndView Add_News() {
+        ModelAndView model_view= new ModelAndView();
+        News_Model news_model=new News_Model();
+        List<Chuyen_Muc_Model> chuyen_muc_model= chuyenmuc_service.GetChuyenmucALL();
+        model_view.addObject("news_form",news_model);
+        model_view.addObject("chuyen_muc",chuyen_muc_model);
+        model_view.setViewName("Admin_Them_BaiViet");
+        return model_view;
+    }
     @RequestMapping(value = "/duyetnews/{id}", method = RequestMethod.GET)
     public ModelAndView Duyet_News(@PathVariable int id) {
         ModelAndView model_view = new ModelAndView();
@@ -91,5 +101,52 @@ public class Admin_Controller {
         trangthai_service.Update_Trangthai(id);
         return new ModelAndView("redirect:/adminnews");
     }
+    @RequestMapping(value="/thembaiviet", method=RequestMethod.GET)
+    public ModelAndView addNews() {
+        ModelAndView model_view= new ModelAndView();
+        News_Model news_model=new News_Model();
+        List<Chuyen_Muc_Model> chuyen_muc_model= chuyenmuc_service.GetChuyenmucALL();
+        model_view.addObject("news_form",news_model);
+        model_view.addObject("chuyen_muc",chuyen_muc_model);
+        model_view.setViewName("Admin_Them_BaiViet");
+        return model_view;
+    }
+    @RequestMapping(value="/save_news", method=RequestMethod.POST)
+    public ModelAndView Save_News(@ModelAttribute("news_form") News_Model news_model) {
+        List<Number_View_Model> number_view_models_FIND= number_view_repository.Find_View(news_model.getId());
+        if(!number_view_models_FIND.isEmpty()) //đã tồn tại
+        {
+            news_service.saveOrUpdate(news_model);
+            return new ModelAndView("redirect:/adminnews");
+        }
+        else {
+            java.util.Date date=new java.util.Date(); //Thêm mới
+            news_model.setThoigian(date);
+            news_service.saveOrUpdate(news_model);
+            trangthai_service.Insert_Trangthai(news_model.getId(),0);
+            number_view_repository.Insert_View(news_model.getId(),0);
+            return new ModelAndView("redirect:/adminnews");
+        }
+    }
+    @RequestMapping(value="/delete_news/{id}", method=RequestMethod.GET)
+    public ModelAndView Delete_News(@PathVariable("id") int id) {
+        number_view_repository.Delete_View(id);
+        trangthai_service.Delete_Trangthai(id);
+        news_service.deleteNews(id);
+        return new ModelAndView("redirect:/adminnews");
+    }
+    @RequestMapping(value = "/update_news/{id}", method = RequestMethod.GET)
+    public ModelAndView Edit_News(@PathVariable int id) {
+        ModelAndView model_view = new ModelAndView();
+        List<Chuyen_Muc_Model> chuyen_muc_model= chuyenmuc_service.GetChuyenmucALL();
+        News_Model news_model_EDIT = news_service.getNewsById(id);
+        model_view.addObject("news_form", news_model_EDIT);
+        model_view.addObject("chuyen_muc",chuyen_muc_model);
+        model_view.setViewName("Admin_Them_BaiViet");
+
+        return model_view;
+
+    }
+
 
 }

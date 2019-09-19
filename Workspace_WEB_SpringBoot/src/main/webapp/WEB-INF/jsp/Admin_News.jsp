@@ -22,6 +22,24 @@
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="../static/assets/js/Lightweight-Chart/cssCharts.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link href="style.css" rel="stylesheet">
+    <script src="../static/js/jquery.jold.paginator.min.js"></script>
+    <style>
+        @media screen and (max-width: 1200px){
+            .tablenews{ overflow-x:auto}
+        }
+        .btn-circle
+        {
+            width: 40px;
+            height: 40px;
+            padding: 10px 0;
+        }
+        .pagination{
+            float:right;
+            margin: 7px 0;
+        }
+    </style>
 
 </head>
 <body>
@@ -101,12 +119,17 @@
             <div class="col-xs-12" >
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="card-title">
-                            <div class="title">DANH SÁCH BÀI VIẾT</div>
+                        <div class="card-title" style="margin-bottom: 20px">
+                            <div class="title" style="float: left">DANH SÁCH BÀI VIẾT</div>
+                            <span>
+                                <spring:url value="/add_News" var="add_News_URL" />
+                                <a href="${add_News_URL}" type="button"  class="btn btn-success btn-circle" style="float: right; margin-right: 1%"><i class="fa fa-plus"></i></a>
+                            </span>
                         </div>
                     </div>
                     <div class="panel-body">
-                        <table class="table table-striped table-bordered table-hover">
+                        <div class="tablenews col-xs-12">
+                        <table class="table table-striped table-bordered table-hover ">
                             <thead>
                             <th scope="row">#ID</th>
                             <th scope="row">Tiêu đề</th>
@@ -118,9 +141,9 @@
                             <th scope="row">Chỉnh sửa</th>
                             <th scope="row">Xóa</th>
                             </thead>
-                            <tbody>
+                            <tbody class="items-container">
                             <c:forEach items="${obj_new_list}" var="new_list">
-                                <tr>
+                                <tr class="item item-visible">
                                     <td>${new_list.id }</td>
                                     <td>${new_list.tieude }</td>
                                     <c:forEach items="${chuyen_muc}" var="chuyenmuc">
@@ -145,7 +168,7 @@
 
                                     <td>
                                         <spring:url value="update_news/${new_list.id}" var="update_News_URL" />
-                                        <a class="btn btn-primary" href="${update_News_URL }" role="button" onclick="Ckick_Chinhsua()">Chỉnh sửa</a>
+                                        <a class="btn btn-primary" href="${update_News_URL }" role="button">Chỉnh sửa</a>
 
                                     </td>
                                     <td>
@@ -157,6 +180,62 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                            <div  class="row">
+                                <div class=" pagination pagination-indicator"></div>
+                            </div>
+
+                            <div class="row">
+                                      <ul class="pagination pagination-container"></ul>
+                            </div>
+
+                            <script>
+                                (function($){
+
+                                    // Initiate the paginator on the .items-container element.
+                                    var paginator = new $('.items-container').joldPaginator({
+                                        'perPage': 4,
+                                        'items': '.item',
+                                        'paginator': '.pagination-container',
+                                        'indicator': {
+                                            'selector': '.pagination-indicator',
+                                            'text': 'Showing item {start}-{end} of {total}',
+                                        }
+                                    });
+
+
+                                    // Toggle items
+                                    $('body').on('change', '.js-toggle-items', function(e) {
+
+                                        e.preventDefault();
+
+                                        var checked = this.checked;
+
+                                        $('.items-container').find('.item')
+                                            .removeClass('item-hidden')
+                                            .addClass('item-visible');
+
+                                        // Include historical reports (invalid)
+                                        if ( checked == true ) {
+                                            $('.items-container').find('.item-toggleable')
+                                                .removeClass('item-hidden')
+                                                .addClass('item-visible');
+                                        }
+
+                                        // Exclude historical reports (invalid)
+                                        if ( checked == false ) {
+                                            $('.items-container').find('.item-toggleable')
+                                                .removeClass('item-visible')
+                                                .addClass('item-hidden');
+                                        }
+
+                                        // Reset the paginator
+                                        paginator.init();
+
+                                    });
+
+                                })(jQuery);
+                            </script>
+                        </div>
 
                 </div>
             </div>
@@ -194,3 +273,28 @@
 
 </body>
 </html>
+<script>
+    function Ckick_Them(){
+        localStorage.setItem("Themmoi","Them moi nha");
+        alert("Thêm mới")
+    }
+
+    function Ckick_Chinhsua(){
+        localStorage.setItem("Themmoi","");
+        alert("Chỉnh sửa")
+    }
+
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+
+</script>

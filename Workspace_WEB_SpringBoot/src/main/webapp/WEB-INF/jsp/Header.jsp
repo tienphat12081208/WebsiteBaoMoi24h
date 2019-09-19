@@ -1,8 +1,11 @@
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Header</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -149,6 +152,7 @@
 <spring:url value="/thethao" var="Thethao"/>
 <spring:url value="/personnel" var="Nhansu"/>
 <spring:url value="/news" var="Baiviet"/>
+<spring:url value="/admin" var="Admin"/>
 <spring:url value="/updateopersonnel/${ID_User}"  var="ChinhsuaTTCN"/>
 <div id="header">
     <div id="img">
@@ -179,6 +183,7 @@
                 <a id="user">Xin chào <c:out value="${User_Session}"></c:out></a>
                 <ul class="sub">
                     <li><a href="${ChinhsuaTTCN}" title="Chỉnh sửa trang cá nhân">Chỉnh sửa trang cá nhân</a></li>
+                    <li><a href="${Admin}" title="Trang Admin">Trang Admin</a></li>
                     <li><a href="#" title="Đổi mật khẩu">Đổi mật khẩu</a></li>
                     <li> <a  href="${Logout}" title="Thoát">Thoát</a></li>
                 </ul>

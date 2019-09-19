@@ -22,6 +22,19 @@
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="../static/assets/js/Lightweight-Chart/cssCharts.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        @media screen and (max-width: 1200px){
+           .tablenhansu{ overflow-x:auto}
+        }
+        .click{
+            z-index: 100;
+            margin: 0 0 0 0;
+            padding: 0;
+            min-height: 1200px;
+        }
+
+    </style>
 
 </head>
 <body>
@@ -34,13 +47,14 @@
             </button>
             <a class="navbar-brand" href="#"><strong><i class="icon fa fa-plane"></i> BÁO MỚI 24H</strong></a>
 
-            <div id="sideNav" href="">
-                <i class="fa fa-bars icon"></i>
+            <div id="sideNav" >
+                <i class="fa fa-bars icon" id="click"></i>
             </div>
+
         </div>
     </nav>
 </div>
-    <nav class="navbar-default navbar-side" role="navigation">
+    <nav class="navbar-default navbar-side" role="navigation" id="navigation_click">
         <div class="sidebar-collapse">
             <ul class="nav" id="main-menu">
 
@@ -77,6 +91,7 @@
     <!-- /. NAV SIDE  -->
 
     <div id="page-wrapper">
+
         <div class="header">
             <h1 class="page-header">
                 Admin <small>Welcome John Doe</small>
@@ -104,13 +119,14 @@
                             </div>
                         <div class="panel-body">
                     <form:form modelAttribute="personnel_form" method="GET" action="${FINDURL }" class="col-xs-12 ">
-                    <div class="form-group">
-                        <label style="">Search</label>
-                        <form:input path="name" cssClass="text-input" id="name"  placeholder="Tìm kiếm theo tên"/>
-                        <button type="submit" class="btn btn-primary">Tìm Kiếm </button>
-                        </form:form>
-                    </div>
-
+                        <div class="form-group">
+                            <label style="">Search</label>
+                            <form:input path="name" cssClass="text-input" id="name"  placeholder="Tìm kiếm theo tên"/>
+                            <button type="submit" class="btn btn-primary">Tìm Kiếm </button>
+                            </form:form>
+                        </div>
+                  <div class="row">
+            <div class="tablenhansu col-xs-12">
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                     <th scope="row">#ID</th>
@@ -159,11 +175,14 @@
                     </c:forEach>
                     </tbody>
                 </table>
-                <spring:url value="/add_Personnel" var="add_Personnel_URL" />
+                </div>
+            </div>
+                        <spring:url value="/add_Personnel" var="add_Personnel_URL" />
                 <a class="btn btn-primary" href="${add_Personnel_URL }" role="button" >Thêm Nhân Viên</a>
                 </div>
 
             </div>
+
           </div>
       </div>
         </div>

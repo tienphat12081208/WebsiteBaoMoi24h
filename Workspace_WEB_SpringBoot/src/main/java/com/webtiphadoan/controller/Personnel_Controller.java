@@ -29,22 +29,7 @@ public class Personnel_Controller {
     Chuyenmuc_Service chuyenmuc_service;
 
 
-    @RequestMapping(value = "/personnel", method = RequestMethod.GET)
-    public ModelAndView Personne_List(@ModelAttribute("personnel_form") Personnel_Model personnel_model) {
 
-            ModelAndView model = new ModelAndView("Personnel_Page");
-
-            if (personnel_model.getName() == null) {
-                personnel_model.setName("");
-            }
-            List<Personnel_Model> personnel_model_List = personnel_service.getPersonnelByName(personnel_model.getName());
-            model.addObject("obj_personnel_list", personnel_model_List);
-            List<Vaitro_Model> vaitro_models= vaitro_service.GetALLvaitro();
-            model.addObject("vaitro_OBJ", vaitro_models);
-            return model;
-
-
-    }
 
     @RequestMapping(value = "/updateopersonnel/{id}", method = RequestMethod.GET)
     public ModelAndView Edit_Personnel(@PathVariable int id) {

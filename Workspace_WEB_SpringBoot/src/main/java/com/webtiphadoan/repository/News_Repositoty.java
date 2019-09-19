@@ -35,4 +35,9 @@ public interface News_Repositoty extends CrudRepository<News_Model, Integer> {
     @Query(value= "Select * From webcloud.news o where o.idchuyenmuc=(Select p.idchuyenmuc From webcloud.news p where p.id=?1)",  nativeQuery = true)
     List<News_Model> News_connection(int id) ;
 
+    @Modifying
+    @Transactional
+    @Query(value= "SELECT *FROM webcloud.`news` p WHERE p.`thoigian`=(SELECT MAX(p.`thoigian`) FROM webcloud.news p, webcloud.newstrangthai o WHERE p.`id`=o.`idnews` AND o.`trangthai`!=0)",  nativeQuery = true)
+    List<News_Model>  New_news();
+
 }

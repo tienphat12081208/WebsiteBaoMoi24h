@@ -20,4 +20,5 @@ public interface News_Service {
     public void deleteNews(int id);
 
     public List<News_Model> getNewsByChuyenMuc(int chuyenmuc);
+    List<News_Model>  New_news();
 }
